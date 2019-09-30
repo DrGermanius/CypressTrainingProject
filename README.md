@@ -15,6 +15,6 @@
 c21525ba-f260-4a95-ae31-2278911df66d" is used for access to project in the Cypress Dashboard.
 6. To run single test use:  "npx cypress open"
 
-  6.1 Choose test and click on him.
+  6.1 Choose a test and click on him.
 
 7. Results are loaded into the Cypress Dashboard  https://dashboard.cypress.io/#/projects/gd3x2a/runs
