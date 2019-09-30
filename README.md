@@ -14,7 +14,7 @@
 ###  5.1 To run all tests in Chrome: <npx cypress run -b chrome"
 
 ### 6. To record runs use: 
-                                          <npx cypress run -b chrome --record --key c21525ba-f260-4a95-ae31-2278911df66d>
+                                 <npx cypress run -b chrome --record --key c21525ba-f260-4a95-ae31-2278911df66d>
 
 #### --record means that transfer results to the Cypress Dashboard is on. --key parameter followed by value
 #### c21525ba-f260-4a95-ae31-2278911df66d is used for access to project in the Cypress Dashboard.
