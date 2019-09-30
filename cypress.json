@@ -1,4 +1,5 @@
 {
+  "baseUrl": "https://reqres.in",
   "integrationFolder": "cypress/all-tests",
   "projectId": "gd3x2a",
   "env":
