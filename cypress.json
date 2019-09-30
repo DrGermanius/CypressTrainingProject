@@ -1,0 +1,10 @@
+{
+  "integrationFolder": "cypress/all-tests",
+  "projectId": "gd3x2a",
+  "env":
+  {
+    "login": "+375447385208",
+    "pass": "gkfdoijsfiodshfdsfhidsfiohdsn",
+    "googleURL": "https://store.google.com/us"
+  }
+}
