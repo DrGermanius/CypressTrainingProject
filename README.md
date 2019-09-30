@@ -23,7 +23,7 @@ npx cypress run -b chrome
 ```
   #### 4.2.1 Parametres for report in the Cypress Dashboard:   
   ```
-  npx cypress run -b chrome --record --key c21525ba-f260-4a95-ae31-2278911df66d
+  npx cypress run --record --key c21525ba-f260-4a95-ae31-2278911df66d
   ```
 **--record means** that transfer results to the Cypress Dashboard is on.  **--key parameter followed by value
  c21525ba-f260-4a95-ae31-2278911df66d** is used for access to project in the Cypress Dashboard.
