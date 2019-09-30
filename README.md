@@ -10,11 +10,14 @@ https://github.com/so1ji/SamolazovProject
 npm install
 ```
 
-## 4. To run all tests use: 
+## 4. Run: 
+
+###  4.1 To run all tests in Electron
 ```
 npx cypress run
 ```
-##  4.1 To run all tests in Chrome: 
+
+###  4.2 To run all tests in Chrome: 
 ```
 npx cypress run -b chrome
 ```
