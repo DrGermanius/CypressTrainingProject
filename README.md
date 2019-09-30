@@ -12,9 +12,11 @@ https://github.com/so1ji/SamolazovProject
 ## 4. Install Cypress: 
 <npm install cypress --save-dev> 
  
-## 5. To run all tests use: <npx cypress run"
+## 5. To run all tests use: 
+<npx cypress run>
 
-##  5.1 To run all tests in Chrome: <npx cypress run -b chrome"
+##  5.1 To run all tests in Chrome: 
+<npx cypress run -b chrome>
 
 ## 6. To record runs use:   
 <npx cypress run -b chrome --record --key c21525ba-f260-4a95-ae31-2278911df66d>
