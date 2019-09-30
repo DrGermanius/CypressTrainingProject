@@ -7,7 +7,7 @@ https://github.com/so1ji/SamolazovProject
 
 ## 3. In project go to the root and perform command: 
 ```
-npx cypress run
+npm install
 ```
 
 ## 4. To run all tests use: 
