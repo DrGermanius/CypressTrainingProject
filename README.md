@@ -21,13 +21,13 @@ npx cypress run
 ```
 npx cypress run -b chrome
 ```
-  ### 4.2.1 Parametres for report in the Cypress Dashboard:   
+  #### 4.2.1 Parametres for report in the Cypress Dashboard:   
   ```
   npx cypress run -b chrome --record --key c21525ba-f260-4a95-ae31-2278911df66d
   ```
 **--record means** that transfer results to the Cypress Dashboard is on.  **--key parameter followed by value
  c21525ba-f260-4a95-ae31-2278911df66d** is used for access to project in the Cypress Dashboard.
-  ### 4.2.2 Results are loaded into the Cypress Dashboard:
+  #### 4.2.2 Results are loaded into the Cypress Dashboard:
   https://dashboard.cypress.io/#/projects/gd3x2a/runs
 ###  4.3 To run single test use then choose a test and click on him:  
 ```
