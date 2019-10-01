@@ -19,15 +19,3 @@ it('Positive: Add pet', () => {
 });
 
 
-it('Positive: Update pet', () => {
-    cy.fixture('pet').then(pet => {
-        cy.request({
-            method: 'POST',
-            url: 'https://petstore.swagger.io/v2/pet',
-            failOnStatusCode: false,
-            body: {pet}
-        }).then(response => {
-            expect(response.status).to.eq(200);
-        })
-    })
-});
