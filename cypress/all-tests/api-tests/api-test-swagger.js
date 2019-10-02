@@ -31,3 +31,15 @@ it('Positive: Update pet', () => {
         })
     })
 });
+
+it('Positive: Get pet', () => {
+    cy.fixture('pet').then(pet => {
+        cy.request({
+            method: 'GET',
+            url: 'https://petstore.swagger.io/v2/pet/findByStatus',
+            body: {pet}
+        }).then(response => {
+            expect(response.status).to.eq(200);
+        })
+    })
+});
