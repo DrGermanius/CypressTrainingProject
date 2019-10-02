@@ -14,6 +14,7 @@ it('Positive: Add pet', () => {
         }).then(response => {
             expect(response.status).to.eq(200);
             expect(response.body).to.have.property('name', pet.name);
+            console.log(response);
         })
     })
 });
