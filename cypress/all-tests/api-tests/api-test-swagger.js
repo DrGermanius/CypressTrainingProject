@@ -13,7 +13,7 @@ it('Positive: Add pet', () => {
             body: {pet}
         }).then(response => {
             expect(response.status).to.eq(200);
-            expect(response.body).to.have.property('status');
+            expect(response.body).to.have.property('name', pet.name);
         })
     })
 });
