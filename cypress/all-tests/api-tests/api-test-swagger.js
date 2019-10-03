@@ -9,8 +9,8 @@ it('Positive: Add pet', () => {
         cy.request({
             method: 'POST',
             url: 'https://petstore.swagger.io/v2/pet',
-            failOnStatusCode: false,
-            body: {pet}
+  //          failOnStatusCode: false,
+            body: pet
         }).then(response => {
             expect(response.status).to.eq(200);
             expect(response.body).to.have.property('name', pet.name);
@@ -26,7 +26,7 @@ it('Positive: Update pet', () => {
             method: 'POST',
             url: 'https://petstore.swagger.io/v2/pet',
             failOnStatusCode: false,
-            body: {pet}
+            body: pet
         }).then(response => {
             expect(response.status).to.eq(200);
         })
