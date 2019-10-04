@@ -2,7 +2,7 @@ describe('Test for swagger petstore', () => {
     before(() => {
 
     })
-});
+
 
 it('Positive: Add pet', () => {
     cy.fixture('pet').then(pet => {
@@ -42,4 +42,5 @@ it('Positive: Get pet', () => {
             expect(response.status).to.eq(200);
         })
     })
+});
 });
