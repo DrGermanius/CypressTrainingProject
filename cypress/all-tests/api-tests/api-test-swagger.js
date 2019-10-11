@@ -15,7 +15,7 @@ describe('Test for swagger petstore', () => {
                 name: Chance().string({length: 100}),
                 id: Chance().integer({min: 0, max: 100}),
                 status: chance.pickone(['available', 'pending', 'sold ']),
-                photoUrl: RandomForTests.fillUrls(100),
+                photoUrls: RandomForTests.fillUrls(100),
                 tags: RandomForTests.fillTags(100),
 
             }
@@ -27,7 +27,7 @@ describe('Test for swagger petstore', () => {
                 name: Chance().string({length: 50}),
                 id: Chance().integer({min: 0, max: 100}),
                 status: chance.pickone(['available', 'pending', 'sold ']),
-                photoUrl: RandomForTests.fillUrls(Chance().integer({min: 0, max: 100})),
+                photoUrls: RandomForTests.fillUrls(Chance().integer({min: 0, max: 100})),
                 tags: RandomForTests.fillTags(Chance().integer({min: 0, max: 100})),
             }
         },
@@ -38,7 +38,7 @@ describe('Test for swagger petstore', () => {
                 name: Chance().string({length: 1}),
                 id: Chance().integer({min: 0, max: 100}),
                 status: chance.pickone(['available', 'pending', 'sold ']),
-                photoUrl: RandomForTests.fillUrls(1),
+                photoUrls: RandomForTests.fillUrls(1),
                 tags: RandomForTests.fillTags(1),
 
             }
@@ -51,6 +51,9 @@ describe('Test for swagger petstore', () => {
                 expect(response.status).to.eq(200);
                 expect(response.body).to.have.property('name', requestData.name);
                 expect(response.body).to.have.property('id', requestData.id);
+                expect(response.body.photoUrls).to.deep.equal(requestData.photoUrls);
+                expect(response.body.tags).to.deep.equal(requestData.tags);
+                console.log(response);
             })
         })
     });
@@ -65,7 +68,19 @@ describe('Test for swagger petstore', () => {
             }).then(response => {
                 expect(response.status).to.eq(200);
                 expect(response.body).to.have.property('name', pet.name);
-                console.log(response);
+            })
+        })
+    });
+
+    it('Negative: Invalid Input ', () => {
+        cy.fixture('pet').then(pet => {
+            cy.request({
+                method: 'POST',
+                url: 'https://petstore.swagger.io/v2/pet',
+                body: {"id": "1"},
+                failOnStatusCode: false,
+            }).then(response => {
+                expect(response.status).to.eq(500);
             })
         })
     });
@@ -74,12 +89,12 @@ describe('Test for swagger petstore', () => {
     it('Positive: Update pet', () => {
         cy.fixture('pet').then(pet => {
             cy.request({
-                method: 'POST',
+                method: 'PUT',
                 url: 'https://petstore.swagger.io/v2/pet',
-                failOnStatusCode: false,
                 body: pet
             }).then(response => {
                 expect(response.status).to.eq(200);
+                expect(response.body).to.have.property('name', pet.name);
             })
         })
     });
@@ -88,10 +103,23 @@ describe('Test for swagger petstore', () => {
         cy.fixture('pet').then(pet => {
             cy.request({
                 method: 'GET',
-                url: 'https://petstore.swagger.io/v2/pet/findByStatus',
+                url: `https://petstore.swagger.io/v2/pet/${pet.id}`,
             }).then(response => {
                 expect(response.status).to.eq(200);
             })
         })
     });
+
+    it('Positive: Delete pet', () => {
+        cy.fixture('pet').then(pet => {
+            cy.request({
+                method: 'DELETE',
+                url: `https://petstore.swagger.io/v2/pet/${pet.id}`,
+            }).then(response => {
+                expect(response.status).to.eq(200);
+                console.log(response);
+            })
+        })
+    });
+
 });

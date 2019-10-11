@@ -4,10 +4,7 @@ class RandomForTests {
     fillUrls(count) {
         let arr = [];
         for (let i = 0; i < count; i++) {
-            arr[i] = {
-                id: Chance().integer({min: 0, max: 100}),
-                wrapped: chance.pickone(['true', 'false'])
-            };
+            arr[i] = Chance().string()
         }
         return arr;
     }
@@ -23,4 +20,5 @@ class RandomForTests {
         return arr;
     }
 }
+
 export default new RandomForTests()
