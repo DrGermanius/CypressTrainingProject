@@ -1,6 +1,6 @@
 import Chance from 'chance'
 import {createPet, deletePet, getPetById, updatePet} from "../../../service/petService"
-import {DATA_OPTIONS, getPetRequestData} from "../../../utils/requestsDataGenerator";
+import {DATA_OPTIONS, fillUrls, getPetRequestData} from "../../../utils/requestsDataGenerator";
 import {API_URL} from "../../../service/apiSettings";
 import {PET_LIMIT} from "../../../utils/limits";
 
@@ -104,9 +104,44 @@ describe('Tests for Create Pet endpoint', () => {
         })
     })
 
-    it('Validation check', () => {
-        createPet({name: PET_LIMIT.name.max + "dsf", photoUrls: PET_LIMIT.photoUrls}, false).then(response => {
-            expect(response.body.name).to.be.lessThan(PET_LIMIT.name.max);
+    it('Validation check: name more than max', () => {
+        let requestData = getPetRequestData()
+        requestData.name = Chance().string({length: PET_LIMIT.name.max + 1})
+        createPet(requestData, false).then(response => {
+            expect(response.status).to.eq(400);
+            console.log(response);
+        })
+    })
+    it('Validation check: name less than min', () => {
+        let requestData = getPetRequestData()
+        requestData.name = Chance().string({length: PET_LIMIT.name.min - 1})
+        createPet(requestData, false).then(response => {
+            expect(response.status).to.eq(400);
+            console.log(response);
+        })
+    })
+    it('Validation check: photoUrl more than max', () => {
+        let requestData = getPetRequestData()
+        requestData.photoUrls = fillUrls(PET_LIMIT.photoUrls.length.max + 1)
+        createPet(requestData, false).then(response => {
+            expect(response.status).to.eq(400);
+            console.log(response);
+        })
+    })
+    it('Validation check: photoUrl less than min', () => {
+        let requestData = getPetRequestData()
+        requestData.photoUrls = fillUrls(PET_LIMIT.photoUrls.length.min - 1)
+        createPet(requestData, false).then(response => {
+            expect(response.status).to.eq(400);
+            console.log(response);
+        })
+    })
+    it('Validation check: incorrect status', () => {
+        let requestData = getPetRequestData()
+        requestData.status = "SOLD"
+        createPet(requestData, false).then(response => {
+            expect(response.status).to.eq(400);
+            console.log(response);
         })
     })
 });
