@@ -1,3 +1,6 @@
+import {printPlanet} from "../../utils/helper";
+
+
 describe('Array Practice', () => {
     it('', () => {
         cy.log("ARRAY TASKS");
@@ -12,23 +15,37 @@ describe('Array Practice', () => {
             {planet: "Neptune", radius: 24764, density: 1.64, distance: 30.07}
         ];
 
-        planets.forEach(planet => cy.log(JSON.stringify(planet)));
 
+        printPlanet(planets);
+
+        cy.log("Add property 'solarSystem' ");
         planets.map(item => item.solarSystem = true);
+        printPlanet(planets);
 
+        cy.log("Add 'SomeNewPlanet'");
         planets.push({planet: "SomeNewPlanet", radius: 24764, density: 1.64, distance: 30.07, solarSystem: false});
+        printPlanet(planets);
 
-        cy.log(planets.reduce((acc, item) => item.radius + acc, 0));
+
+        cy.log("Sum of radii = " + planets.reduce((acc, item) => item.radius + acc, 0));
+
 
         cy.log(planets.filter(item => item.distance > 5));
 
-       planets.splice(planets.indexOf("SomeNewPlanet"));
+        cy.log("Delete 'SomeNewPlanet'");
+        planets.splice(planets.indexOf("SomeNewPlanet"));
+        printPlanet(planets);
 
-       cy.log(planets.sort((a,b) => a.radius - b.radius ));
+        cy.log("Sorting by radius");
+        planets.sort((a, b) => a.radius - b.radius);
+        printPlanet(planets);
 
-       cy.log(planets.sort((a,b) => a.name - b.name ));
+        cy.log("Sorting by name");
+        planets.sort((a, b) => a.name - b.name);
+        printPlanet(planets);
 
-       cy.log(planets.length);
+
+        cy.log("Array length = " + planets.length);
 
 
     })
