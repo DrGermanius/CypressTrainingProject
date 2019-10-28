@@ -2,7 +2,7 @@ import {printPlanet} from "../../utils/helper";
 
 
 describe('Array Practice', () => {
-    it('', () => {
+    it('Planets Task', () => {
         cy.log("ARRAY TASKS");
         let planets = [
             {planet: "Mercury", radius: 2440, density: 5.43, distance: 0.395},
