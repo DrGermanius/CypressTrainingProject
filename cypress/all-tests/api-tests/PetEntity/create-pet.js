@@ -109,14 +109,16 @@ describe('Tests for Create Pet endpoint', () => {
         requestData.name = Chance().string({length: PET_LIMIT.name.max + 1})
         createPet(requestData, false).then(response => {
             expect(response.status).to.eq(400);
+            expect(response.messages[0].fieldError).to.eq(`Length must be between ${PET_LIMIT.tags.name.min} and ${PET_LIMIT.tags.name.max}`)
             console.log(response);
         })
     })
     it('Validation check: name less than min', () => {
         let requestData = getPetRequestData()
-        requestData.name = Chance().string({length: PET_LIMIT.name.min - 1})
+        requestData.name = ""
         createPet(requestData, false).then(response => {
             expect(response.status).to.eq(400);
+            expect(response.messages[0].fieldError).to.eq(`Length must be between ${PET_LIMIT.tags.name.min} and ${PET_LIMIT.tags.name.max}`)
             console.log(response);
         })
     })
@@ -125,14 +127,16 @@ describe('Tests for Create Pet endpoint', () => {
         requestData.photoUrls = fillUrls(PET_LIMIT.photoUrls.length.max + 1)
         createPet(requestData, false).then(response => {
             expect(response.status).to.eq(400);
+            expect(response.messages[0].fieldError).to.eq(`Length must be between ${PET_LIMIT.tags.name.min} and ${PET_LIMIT.tags.name.max}`)
             console.log(response);
         })
     })
     it('Validation check: photoUrl less than min', () => {
         let requestData = getPetRequestData()
-        requestData.photoUrls = fillUrls(PET_LIMIT.photoUrls.length.min - 1)
+        requestData.photoUrls = ""
         createPet(requestData, false).then(response => {
             expect(response.status).to.eq(400);
+            expect(response.messages[0].fieldError).to.eq(`Length must be between ${PET_LIMIT.tags.name.min} and ${PET_LIMIT.tags.name.max}`)
             console.log(response);
         })
     })
@@ -141,6 +145,7 @@ describe('Tests for Create Pet endpoint', () => {
         requestData.status = "SOLD"
         createPet(requestData, false).then(response => {
             expect(response.status).to.eq(400);
+            expect(response.messages[0].status).to.eq(`${PET_LIMIT.status}`);
             console.log(response);
         })
     })
