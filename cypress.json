@@ -6,7 +6,8 @@
     "login": "+375447385208",
     "pass": "gkfdoijsfiodshfdsfhidsfiohdsn",
     "googleURL": "https://store.google.com/us",
-    "petStoreApiUrl": "https://petstore.swagger.io/v2"
+    "petStoreApiUrl": "https://petstore.swagger.io/v2",
+    "davidTeaUrl" : "https://www.davidstea.com/us_en/tea/loose-leaf-tea/herbal"
   },
   "reporter": "cypress-testrail-accumulative-reporter",
   "reporterOptions": {
