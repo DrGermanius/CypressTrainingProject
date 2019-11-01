@@ -11,6 +11,7 @@
   "devDependencies": {
     "chance": "^1.1.0",
     "cypress": "^3.4.1",
+    "cypress-testrail-accumulative-reporter": "^1.1.4",
     "cypress-xpath": "^1.4.0"
   },
   "dependencies": {}

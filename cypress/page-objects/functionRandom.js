@@ -20,5 +20,5 @@ class RandomForTests {
         return arr;
     }
 }
-
 export default new RandomForTests()
+//
