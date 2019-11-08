@@ -34,6 +34,9 @@ export const difference = (setA, setB) => {
     return _difference
 }
 
-export const printPlanet = (array) => {
-    array.forEach(item => cy.log(JSON.stringify(item)));
+export const printPlanet = (map) => {
+    map.forEach((value, key) => {
+        cy.log(key + ': ' + Object.keys(value).map(objKey => objKey + ':' + value[objKey]).join(', '))
+    });
+
 }
