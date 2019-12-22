@@ -3,45 +3,75 @@ import Chance from "chance";
 
 describe('UI - test Practice', () => {
 
-    it('Card: User is able to add single product', () => {
-        ozPage.open();
-        ozPage.putGoodsInBasket();
-        cy.get('.top-panel__userbar__cart__item').click();
-        cy.get('.goods-table-cell__line_title').should(($this) => {
-            expect($this).to.contain(`Как пасти котов`)
-        });
+    beforeEach(() => {
+        cy.fixture('ozby').then(data => {
+            cy.wrap(data).as('ozbyData')
+        })
     });
 
+    const DATA_SET = [
+        {description: 'Single product', count: 1},
+        {description: 'Several'}
+    ];
 
-    it('Card: User is able to change count of one product from single to multiple (more than 10)', () => {
-        let count = chance.integer({min: 10, max: 99});
-        ozPage.open();
-        ozPage.putGoodsInBasket();
-        cy.get('.top-panel__userbar__cart__item').click();
-        cy.get('.goods-table-cell__line_title').should(($this) => {
-            expect($this).to.contain(`Как пасти котов`)
+
+    DATA_SET.forEach(({description, count}) => {
+
+        it(`Card: User is able to add ${description} product `, function () {
+            cy.fixture('ozby').then(data => {
+                ozPage.open();
+
+                for (let i = 0; i < (count || data.productName.length); i++) {
+                    ozPage.putProductInBasket(data.productName[i]);
+                    cy.get('.top-panel__userbar__cart__item').click();
+                    cy.get('.goods-table-cell__line_title').should(($this) => {
+                        expect($this).to.contain(data.productName[i])
+                    });
+                }
+            });
         });
-        ozPage.changeCountOfGoods(count);
-        cy.get('.deal-form-main__sub').should(($this) => {
-            expect($this).to.contain(`Итого ${count}`)
+
+        it(`Card: User is able to change count of ${description} product from single to multiple (more than 10)`, () => {
+            let countOfGoods = chance.integer({min: 10, max: 99});
+            cy.fixture('ozby').then(data => {
+                cy.log(countOfGoods);
+                ozPage.open();
+
+                for (let i = 0; i < (count || data.productName.length); i++) {
+                ozPage.putProductInBasket(data.productName[i]);
+                cy.get('.top-panel__userbar__cart__item').click();
+                cy.get('.goods-table-cell__line_title').should(($this) => {
+                    expect($this).to.contain(`Как пасти котов`)
+                });
+                ozPage.changeCountOfGoods(countOfGoods);
+                cy.get('.deal-form-main__sub').should(($this) => {
+                    expect($this).to.contain(`Итого ${countOfGoods}`)
+                });
+                }
+            });
         });
-    })
 
 
+        it(`Card: User is able to change count of ${description} product from single to multiple (less than 10)`, () => {
+            let countOfGoods = chance.integer({min: 2, max: 9});
+            cy.fixture('ozby').then(data => {
+                ozPage.open();
 
-    it('Card: User is able to change count of one product from single to multiple (less than 10)', () => {
-        let count = chance.integer({min: 1, max: 9});
-        ozPage.open();
-        ozPage.putGoodsInBasket();
-        cy.get('.top-panel__userbar__cart__item').click();
-        cy.get('.goods-table-cell__line_title').should(($this) => {
-            expect($this).to.contain(`Как пасти котов`)
+                for (let i = 0; i < (count || data.productName.length); i++) {
+                    ozPage.putProductInBasket(data.productName[i]);
+                    cy.get('.top-panel__userbar__cart__item').click();
+                    cy.get('.goods-table-cell__line_title').should(($this) => {
+                        expect($this).to.contain(`Как пасти котов`)
+                    });
+                    ozPage.changeCountOfGoods(countOfGoods);
+                    cy.get('.deal-form-main__sub').should(($this) => {
+                        expect($this).to.contain(`Итого ${countOfGoods}`)
+                    });
+                }
+            });
         });
-        ozPage.changeCountOfGoods(count);
-        cy.get('.deal-form-main__sub').should(($this) => {
-            expect($this).to.contain(`Итого ${count}`)
-        });
-    }) ;
 
+
+    });
 
 });

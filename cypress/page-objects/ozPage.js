@@ -1,35 +1,23 @@
-
 class OzPage {
 
-
-    static getData()
-    {
-
-    }
-
-    open()
-    {
-        cy.fixture('ozby').then(data=>
-        {
+    open() {
+        cy.fixture('ozby').then(data => {
             cy.wrap(data).as('ozbyData')
         });
-        cy.get('@ozbyData').then((ozbyData)=>
-        cy.visit(ozbyData.url)
+        cy.get('@ozbyData').then((ozbyData) =>
+            cy.visit(ozbyData.url)
         );
     }
 
-    putGoodsInBasket()
-    {
-        cy.fixture('ozby').then(data=>
-        {
-            cy.wrap(data).as('ozbyData')
-        });
-
-        cy.get('@ozbyData').then((ozbyData)=>
-            cy.get("#top-s").click().type(ozbyData.productName)
-        );
+    putProductInBasket(product) {
+        //cy.on('uncaught:exception', (err, runnable) => {
+            cy.log('product' + product)
+            cy.get("#top-s").click().type(product)
+          //  done()
+          //  return false
+        //})
         cy.get('.top-panel__search__btn').click();
-        cy.get('.addtocart-btn').click();
+        cy.get('.addtocart-btn').should('exist').click();
     }
 
 
@@ -42,25 +30,22 @@ class OzPage {
     }
 
 
-    changeCountOfGoods(count)
-    {
+    changeCountOfGoods(count) {
 
         cy.get('.i-amount-select').click();
 
-        if(count < 10)
-        {
+        if (count < 10) {
             cy.get('.i-amount-select__value').contains(count).click();
         }
-        else
-        {
+        else {
             cy.get('.i-amount-select__value').contains('10+').click();
             cy.get('.i-input_value').type(count);
 
         }
-     //   this.clearBasket();
+        //   this.clearBasket();
     }
 
 
-
 }
+
 export default new OzPage();
