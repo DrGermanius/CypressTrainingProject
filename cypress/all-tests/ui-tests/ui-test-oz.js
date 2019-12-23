@@ -20,14 +20,14 @@ describe('UI - test Practice', () => {
         it(`Card: User is able to add ${description} product `, function () {
             cy.fixture('ozby').then(data => {
                 ozPage.open();
-
-                for (let i = 0; i < (count || data.productName.length); i++) {
-                    ozPage.putProductInBasket(data.productName[i]);
-                    cy.get('.top-panel__userbar__cart__item').click();
-                    cy.get('.goods-table-cell__line_title').should(($this) => {
-                        expect($this).to.contain(data.productName[i])
+                data = (count === 1) ? [data.productName[0]] : data;
+                data.forEach(item => {
+                    ozPage.putProductInBasket(item);
+                    ozPage.openBasket();
+                    ozPage.basketItems.should(($this) => {
+                        expect($this).to.contain(item)
                     });
-                }
+                })
             });
         });
 
@@ -37,17 +37,21 @@ describe('UI - test Practice', () => {
                 cy.log(countOfGoods);
                 ozPage.open();
 
-                for (let i = 0; i < (count || data.productName.length); i++) {
-                ozPage.putProductInBasket(data.productName[i]);
-                cy.get('.top-panel__userbar__cart__item').click();
-                cy.get('.goods-table-cell__line_title').should(($this) => {
-                    expect($this).to.contain(`Как пасти котов`)
-                });
-                ozPage.changeCountOfGoods(countOfGoods);
-                cy.get('.deal-form-main__sub').should(($this) => {
-                    expect($this).to.contain(`Итого ${countOfGoods}`)
-                });
-                }
+
+                cy.fixture('ozby').then(data => {
+                    data = (count === 1) ? [data.productName[0]] : data;
+                    data.forEach(item => {
+                        ozPage.putProductInBasket(item);
+                        ozPage.openBasket();
+                        ozPage.basketItems.should(($this) => {
+                            expect($this).to.contain(item)
+                        });
+                        ozPage.changeCountOfGoods(countOfGoods);
+                        ozPage.countOfItems.should(($this) => {
+                            expect($this).to.contain(`Итого ${countOfGoods}`)
+                        });
+                    })
+                })
             });
         });
 
@@ -57,17 +61,18 @@ describe('UI - test Practice', () => {
             cy.fixture('ozby').then(data => {
                 ozPage.open();
 
-                for (let i = 0; i < (count || data.productName.length); i++) {
-                    ozPage.putProductInBasket(data.productName[i]);
-                    cy.get('.top-panel__userbar__cart__item').click();
-                    cy.get('.goods-table-cell__line_title').should(($this) => {
-                        expect($this).to.contain(`Как пасти котов`)
+                data = (count === 1) ? [data.productName[0]] : data;
+                data.forEach(item => {
+                    ozPage.putProductInBasket(item);
+                    ozPage.openBasket();
+                    ozPage.basketItems.should(($this) => {
+                        expect($this).to.contain(item)
                     });
                     ozPage.changeCountOfGoods(countOfGoods);
-                    cy.get('.deal-form-main__sub').should(($this) => {
+                    ozPage.countOfItems.should(($this) => {
                         expect($this).to.contain(`Итого ${countOfGoods}`)
                     });
-                }
+                })
             });
         });
 

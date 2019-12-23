@@ -45,6 +45,21 @@ class OzPage {
         //   this.clearBasket();
     }
 
+    openBasket()
+    {
+        cy.get('.top-panel__userbar__cart__item').click();
+    }
+
+    get basketItems()
+    {
+        return cy.get('.goods-table-cell__line_title');
+    }
+
+    get countOfItems()
+    {
+        return cy.get('.deal-form-main__sub');
+    }
+
 
 }
 
