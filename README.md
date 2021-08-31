@@ -1,3 +1,6 @@
+#  Description
+This project was created as a result of passing automation QA course. It helped to familarize myself with Cypress and JS in UI and API testing.
+
 #  How to run tests
 ## 1. Download and install NodeJS.           
 https://nodejs.org/en/download/
